@@ -2,8 +2,8 @@ import Header from "./components/Layout/Header";
 import React, {useState} from 'react';
 import Meals from "./components/Meals/Meals";
 import Cart from './components/Cart/Cart';
+import CartProvider from "./store/CartProvider";
 
-  
 function App() {
   const [ModalState, SetModalState] = useState(false);
 
@@ -16,13 +16,11 @@ function App() {
   }
   
   return (
-    <React.Fragment>
+    <CartProvider>
       {ModalState && <Cart onClick={modalStateFalse}/>}
       <Header onClick={modalStateTrue}/>
-      <main>
       <Meals/>
-      </main>
-    </React.Fragment>
+    </CartProvider>
   );
 }
 
