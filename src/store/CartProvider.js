@@ -25,7 +25,6 @@ const cartReducer = (state, action) => {
             }
 
             updatedTotalAmount = updatedAmount;
-            console.log(updatedTotalAmount);
         } else {
             updatedItems       = state.items.concat(action.item);
             updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount; 
