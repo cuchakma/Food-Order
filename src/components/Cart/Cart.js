@@ -14,11 +14,11 @@ const Cart = (props) => {
 
     };
 
-    const cartItemAddHandler    = (item) => {
-
+    const cartItemAddHandler = (item) => {
+        itemState.addItem({...item, amount:1});
     };
 
-    const cartItems             = <ul className={classes['cart-items']}>{
+    const cartItems = <ul className={classes['cart-items']}>{
         Items.map((item) => {
             return <CartItem key={item.id} name={item.name} amount={item.amount} price={item.price} onRemove={cartItemRemoveHandler.bind(null, item.id)} onAdd={cartItemAddHandler.bind(null, item)} />
         }
