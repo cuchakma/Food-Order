@@ -35,23 +35,41 @@ const cartReducer = (state, action) => {
             updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount; 
         }
 
+        return {
+            items:updatedItems,
+            totalAmount:updatedTotalAmount
+        };
+
     }
 
     if( action.type === 'remove-item' ) {
+        let existingitemIndex;
+        let newNode;
         updatedItems       = [...state.items];
         updatedTotalAmount = state.totalAmount;
-        for( let index in updatedItems ) {
-            if( action.id === updatedItems[index].id && updatedItems[index].amount > 1 ) {
-                updatedItems[index].amount--;
-                updatedTotalAmount = updatedTotalAmount - updatedItems[index].price;
+
+        existingitemIndex  = updatedItems.findIndex((value) => {
+            return value.id === action.id;
+        });
+
+        if( existingitemIndex !== -1 ) {
+            newNode = {
+                ...updatedItems[existingitemIndex],
+                amount:updatedItems[existingitemIndex].amount - 1
+            }
+
+            updatedItems[existingitemIndex] = newNode;
+
+            updatedTotalAmount -= updatedItems[existingitemIndex].price
+
+            return {
+                items:updatedItems,
+                totalAmount:updatedTotalAmount
             }
         }
     }
 
-    return {
-        items:updatedItems,
-        totalAmount:updatedTotalAmount
-    };
+    
 };
 
 const CartProvider = (props) => {
