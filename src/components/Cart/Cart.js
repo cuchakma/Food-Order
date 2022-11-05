@@ -11,7 +11,7 @@ const Cart = (props) => {
     const hasItems              = itemState.items.length > 0;
     const totalAmount           = `$${itemState.totalAmount.toFixed(2)}`;
     const cartItemRemoveHandler = (id) => {
-
+        itemState.removeItem(id);
     };
 
     const cartItemAddHandler = (item) => {

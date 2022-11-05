@@ -28,7 +28,7 @@ const cartReducer = (state, action) => {
             for( let item of updatedItems ) {
                 totalAmount += item.price * item.amount;
             }
-            
+
             updatedTotalAmount = totalAmount;
         } else {
             updatedItems       = state.items.concat(action.item);
@@ -38,7 +38,14 @@ const cartReducer = (state, action) => {
     }
 
     if( action.type === 'remove-item' ) {
-
+        updatedItems       = [...state.items];
+        updatedTotalAmount = state.totalAmount;
+        for( let index in updatedItems ) {
+            if( action.id === updatedItems[index].id && updatedItems[index].amount > 1 ) {
+                updatedItems[index].amount--;
+                updatedTotalAmount = updatedTotalAmount - updatedItems[index].price;
+            }
+        }
     }
 
     return {
