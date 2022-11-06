@@ -46,7 +46,7 @@ const cartReducer = (state, action) => {
         let existingitemIndex;
         let newNode;
         updatedItems       = [...state.items];
-        updatedTotalAmount = state.totalAmount;
+        updatedTotalAmount = state.totalAmount.toFixed(2);
 
         existingitemIndex  = updatedItems.findIndex((value) => {
             return value.id === action.id;
