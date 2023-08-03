@@ -1,21 +1,30 @@
 import React from 'react';
-import classes from './CartItem.module.css';
+import classes from '../styles/CartItem.module.css';
 
-const CartItem = (props) => {
-  const price = `$${props.price.toFixed(2)}`;
+const CartItem = ( { dispatcher, item } ) => {
+  const { id, price, name, amount } = item;
+  const itemPrice                   = `$${price.toFixed(2)}`;
+
+  function removeItem(type, id) {
+    dispatcher({type:type, id:id})
+  }
+
+  function addItem(type, item){
+    dispatcher({type:type, item:item})
+  }
 
   return (
     <li className={classes['cart-item']}>
       <div>
-        <h2>{props.name}</h2>
+        <h2>{name}</h2>
         <div className={classes.summary}>
-          <span className={classes.price}>{price}</span>
-          <span className={classes.amount}>x {props.amount}</span>
+          <span className={classes.price}>{itemPrice}</span>
+          <span className={classes.amount}>x {amount}</span>
         </div>
       </div>
       <div className={classes.actions}>
-        <button onClick={props.onRemove}>−</button>
-        <button onClick={props.onAdd}>+</button>
+        <button onClick={() => dispatcher({type:'remove-item', id:id})}>−</button>
+        <button onClick={() => dispatcher({type:'add-item', item})}>+</button>
       </div>
     </li>
   );

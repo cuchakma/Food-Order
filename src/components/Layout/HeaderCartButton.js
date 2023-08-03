@@ -1,25 +1,24 @@
 import React from "react";
 import CartIcon from "../Cart/CartIcon";
-import classes from './HeaderCartButton.module.css';
+import classes from '../styles/HeaderCartButton.module.css';
 import { useContext } from "react";
 import cartContext from "../../store/cart-context";
 
-const HeaderCartButton = (props) => {
-    const cartCtx = useContext(cartContext);
-    let totalItems   = 0;   
+const HeaderCartButton = ( { dispatcher } ) => {
+    const { items }  = useContext(cartContext);
 
-    for( let item of cartCtx.items ) {
-        totalItems += item.amount;
-    }
-    
+    let calculateTotalItems = items.length > 0 ? items.reduce((total, currentValue) => {
+        return total + currentValue.amount;
+    }, 0) : 0;
+
     return (
-        <button className={classes.button} onClick={props.onClick}>
+        <button className={classes.button} onClick={(e) => dispatcher({type:'modal-state-open'})}>
             <span className={classes.icon}>
                 <CartIcon/>
             </span>
             <span>Your Cart</span>
             <span className={classes.badge}>
-                {totalItems}
+                {calculateTotalItems}
             </span>
         </button>
     )

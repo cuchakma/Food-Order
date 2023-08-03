@@ -1,25 +1,21 @@
 import Header from "./components/Layout/Header";
-import React, {useState} from 'react';
+import React from 'react';
 import Meals from "./components/Meals/Meals";
 import Cart from './components/Cart/Cart';
 import CartProvider from "./store/CartProvider";
+import useGlobalStore from "./customHook/useGlobalStore";
+import { cartReducer } from "./store/cartReducer";
+import { defaultState } from "./store/defaultState";
 
 function App() {
-  const [ModalState, SetModalState] = useState(false);
+  const [updatedCartState, dispatch] = useGlobalStore(cartReducer, defaultState);
+  const { modalState }               = updatedCartState;
 
-  let modalStateTrue = () => {
-    SetModalState(true);
-  }
-
-  let modalStateFalse = (value) => {
-    SetModalState(false);
-  }
-  
   return (
-    <CartProvider>
-      {ModalState && <Cart onClick={modalStateFalse}/>}
-      <Header onClick={modalStateTrue}/>
-      <Meals/>
+    <CartProvider state={updatedCartState}>
+      {modalState && <Cart dispatcher={dispatch}/>}
+      <Header dispatcher={dispatch}/>
+      <Meals dispatcher={dispatch}/>
     </CartProvider>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './MealItemForm.module.css'
+import classes from '../../styles/MealItemForm.module.css'
 import Input from "../../UI/Input";
 import { useRef, useState } from "react";
 

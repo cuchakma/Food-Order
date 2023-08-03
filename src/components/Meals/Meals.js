@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 import MealsSummary from "./MealsSummary";
 import AvailableMeals from "./AvailableMeals";
 
-const Meals = () => {
+const Meals = ({ dispatcher }) => {
     return <Fragment>
                 <MealsSummary/>
-                <AvailableMeals/>
+                <AvailableMeals dispatcher={dispatcher}/>
            </Fragment>
 };
 
