@@ -3,9 +3,11 @@ import CartIcon from "../Cart/CartIcon";
 import classes from '../styles/HeaderCartButton.module.css';
 import { useContext } from "react";
 import cartContext from "../../store/cart-context";
+import dispatchContext from "../../store/dispatch-context";
 
-const HeaderCartButton = ( { dispatcher } ) => {
+const HeaderCartButton = () => {
     const { items }  = useContext(cartContext);
+    const dispatcher = useContext(dispatchContext);
 
     let calculateTotalItems = items.length > 0 ? items.reduce((total, currentValue) => {
         return total + currentValue.amount;

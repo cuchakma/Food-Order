@@ -1,6 +1,6 @@
 import cartContext from "./cart-context";
 
-const CartProvider = ( { children, state } ) => {
+const CartProvider = ( {children, state} ) => {
     return ( <cartContext.Provider value={state}>{children}</cartContext.Provider> );
 };
 

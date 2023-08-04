@@ -1,5 +1,6 @@
 export const defaultState = {
     items:[],
     totalAmount:0,
-    modalState:false
+    modalState:false,
+    amountIsValid:true
 }

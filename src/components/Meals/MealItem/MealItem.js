@@ -1,20 +1,11 @@
 import React, { useContext } from "react";
 import MealItemForm from "./MealItemForm";
 import classes from '../../styles/MealItem.module.css';
+import dispatchContext from "../../../store/dispatch-context";
 
 
-const MealItem = ( { price, id, name, description, dispatcher } ) => {
+const MealItem = ( { price, id, name, description } ) => {
     const itemPrice = `$${price.toFixed(2)}`;
-
-
-    const addToCartHandler = (enteredAmount) => {
-        dispatcher({type:'add-item',item:{
-            id:id,
-            name:name,
-            amount:enteredAmount,
-            price:price
-        }});
-    };
 
     return (
         <li className={classes.meal}>
@@ -24,7 +15,7 @@ const MealItem = ( { price, id, name, description, dispatcher } ) => {
                 <div className={classes.price}>{itemPrice}</div>
             </div>
             <div>
-                <MealItemForm onAddToCart={addToCartHandler} id={id}/>
+                <MealItemForm id={id} price={price} name={name} description={description}/>
             </div>
         </li>
     );

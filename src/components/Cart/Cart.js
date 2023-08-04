@@ -1,17 +1,19 @@
 import Modal from '../UI/Modal';
 import { useContext } from 'react';
 import cartContext from '../../store/cart-context';
+import dispatchContext from '../../store/dispatch-context';
 import CartList from './CartList';
 import classes from '../styles/Cart.module.css';
 
-const Cart = ( { dispatcher } ) => {
+const Cart = () => {
     const { items, totalAmount } = useContext(cartContext);
+    const dispatcher             = useContext(dispatchContext);
     const hasItems               = items?.length > 0;
     const amount                 = `$${totalAmount?.toFixed(2)}`;
 
     return (
-        <Modal dispatcher={dispatcher}>
-            <CartList dispatcher={dispatcher}/>
+        <Modal>
+            <CartList/>
             <div className={classes.total}>
                 <span>Total Amount</span>
                 <span>{amount}</span>

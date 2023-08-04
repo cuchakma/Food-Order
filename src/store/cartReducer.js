@@ -1,7 +1,7 @@
 import { calculateTotal } from "../customHook/helper";
 
 export const cartReducer = (state, action) => {
-    let { item, type, id, qty }  = action;
+    let { item, type, id, qty, modalState, amountRef }  = action;
     let { items }                = state;
 
     if( type === 'add-item' ) {
@@ -32,11 +32,20 @@ export const cartReducer = (state, action) => {
         return { ...state, items, totalAmount:calculateTotal(items) };
     }
 
-    if( action.type === 'modal-state-open' ) {
-        return {...state, modalState: true}
+    if( type === 'amount-validation' ){
+        if( amountRef.current.value <= 0 || amountRef.current.value > 5 ) {
+            return {...state, amountIsValid:false}
+        }
+        return state;
     }
 
-    if( action.type === 'cart-modal-close' ) {
-        return {...state, modalState: false}
+    if( type === 'modal-state-open' ) {
+        return {...state, modalState:true};
     }
+
+    if( type === 'cart-modal-close' ) {
+        return {...state, modalState:false};
+    }
+
+    return {...state};
 }

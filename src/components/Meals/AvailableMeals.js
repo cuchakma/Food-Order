@@ -31,11 +31,11 @@ const DUMMY_MEALS = [
   ];
 
 
-const AvailableMeals = ( { dispatcher } ) => {
+const AvailableMeals = () => {
     return (
         <Card>
           <ul className={classes.meals}>
-              {DUMMY_MEALS.map( ({id, price, name, description}, index) => <MealItem key={index} id={id} price={price} name={name} description={description} dispatcher={dispatcher}/> )}
+              {DUMMY_MEALS.map( ({id, price, name, description}, index) => <MealItem key={index} id={id} price={price} name={name} description={description}/> )}
           </ul>
         </Card>
     )

@@ -1,9 +1,12 @@
 import React from 'react';
 import classes from '../styles/CartItem.module.css';
+import dispatchContext from '../../store/dispatch-context';
+import { useContext } from 'react';
 
-const CartItem = ( { dispatcher, item } ) => {
+const CartItem = ( { item } ) => {
   const { id, price, name, amount } = item;
   const itemPrice                   = `$${price.toFixed(2)}`;
+  const dispatcher                  = useContext(dispatchContext);
 
   return (
     <li className={classes['cart-item']}>

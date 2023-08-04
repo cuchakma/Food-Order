@@ -1,8 +1,9 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext} from 'react';
 import ReactDOM  from 'react-dom';
 import classes from '../styles/Modal.module.css';
+import cartContext from '../../store/cart-context';
 
-const Backdrop = ( { dispatcher } ) => {
+const Backdrop = ( { dispatcher } ) => {    
     return (
         <div className={classes.backdrop} onClick={() => dispatcher({type:'cart-modal-close'})}/>
     );
@@ -18,9 +19,11 @@ const ModalOverlay = ( { children } ) => {
     )
 };
 
-const Modal = ({ dispatcher, children }) =>  {
-    var overlay;
-    var ModalContent;
+const Modal = ( { children }) =>  {
+    let overlay;
+    let ModalContent;
+
+    const dispatcher = useContext( cartContext );
 
     overlay      = ReactDOM.createPortal(<Backdrop dispatcher={dispatcher}/>, PortalElement);
     ModalContent = ReactDOM.createPortal(<ModalOverlay>{children}</ModalOverlay>, PortalElement);
