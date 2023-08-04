@@ -5,14 +5,6 @@ const CartItem = ( { dispatcher, item } ) => {
   const { id, price, name, amount } = item;
   const itemPrice                   = `$${price.toFixed(2)}`;
 
-  function removeItem(type, id) {
-    dispatcher({type:type, id:id})
-  }
-
-  function addItem(type, item){
-    dispatcher({type:type, item:item})
-  }
-
   return (
     <li className={classes['cart-item']}>
       <div>
@@ -23,8 +15,8 @@ const CartItem = ( { dispatcher, item } ) => {
         </div>
       </div>
       <div className={classes.actions}>
-        <button onClick={() => dispatcher({type:'remove-item', id:id})}>−</button>
-        <button onClick={() => dispatcher({type:'add-item', item})}>+</button>
+        <button onClick={() => dispatcher({type:'update-item', id:id, qty:-1})}>−</button>
+        <button onClick={() => dispatcher({type:'update-item', id:id, qty:1})}>+</button>
       </div>
     </li>
   );
